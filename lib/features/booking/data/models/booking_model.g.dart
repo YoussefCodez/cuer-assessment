@@ -17,25 +17,31 @@ class BookingModelAdapter extends TypeAdapter<BookingModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return BookingModel(
-      serviceId: fields[0] as String,
-      dayName: fields[1] as String,
-      time: fields[2] as String,
-      notes: fields[3] as String,
+      id: fields[0] as String,
+      service: fields[1] as String,
+      date: fields[2] as String,
+      time: fields[3] as String,
+      notes: fields[4] as String,
+      status: fields[5] as BookingStatus,
     );
   }
 
   @override
   void write(BinaryWriter writer, BookingModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.serviceId)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.dayName)
+      ..write(obj.service)
       ..writeByte(2)
-      ..write(obj.time)
+      ..write(obj.date)
       ..writeByte(3)
-      ..write(obj.notes);
+      ..write(obj.time)
+      ..writeByte(4)
+      ..write(obj.notes)
+      ..writeByte(5)
+      ..write(obj.status);
   }
 
   @override

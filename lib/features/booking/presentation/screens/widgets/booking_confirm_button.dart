@@ -1,4 +1,3 @@
-import 'package:cure/features/home/presentation/screens/main_navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,17 +8,17 @@ import 'package:cure/features/booking/presentation/view_model/booking_cubit.dart
 import 'package:cure/features/booking/presentation/view_model/booking_states.dart';
 
 class BookingConfirmButton extends StatelessWidget {
-  final String serviceId;
+  final String serviceName;
   final String selectedDay;
   final String selectedTime;
-  final String notes;
+  final TextEditingController notesController;
 
   const BookingConfirmButton({
     super.key,
-    required this.serviceId,
+    required this.serviceName,
     required this.selectedDay,
     required this.selectedTime,
-    required this.notes,
+    required this.notesController,
   });
 
   @override
@@ -27,10 +26,7 @@ class BookingConfirmButton extends StatelessWidget {
     return BlocListener<BookingCubit, BookingState>(
       listener: (context, state) {
         if (state is BookingStateSubmitted) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MainNavigationScreen()),
-          );
+          Navigator.popUntil(context, (route) => route.isFirst);
         } else if (state is BookingStateSubmitFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -68,10 +64,10 @@ class BookingConfirmButton extends StatelessWidget {
                   : () {
                       context.read<BookingCubit>().submitBooking(
                         BookingEntity(
-                          serviceId: serviceId,
-                          dayName: selectedDay,
+                          service: serviceName,
+                          date: selectedDay,
                           time: selectedTime,
-                          notes: notes,
+                          notes: notesController.text,
                         ),
                       );
                     },

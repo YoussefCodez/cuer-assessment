@@ -55,7 +55,7 @@ extension BookingStatePatterns on BookingState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( BookingStateInitial value)?  initial,TResult Function( BookingStateLoading value)?  loading,TResult Function( BookingStateSuccess value)?  success,TResult Function( BookingStateFailure value)?  failure,TResult Function( BookingStateSubmitting value)?  submitting,TResult Function( BookingStateSubmitted value)?  submitted,TResult Function( BookingStateSubmitFailure value)?  submitFailure,TResult Function( BookingStateLoadingHistory value)?  loadingHistory,TResult Function( BookingStateHistorySuccess value)?  historySuccess,TResult Function( BookingStateHistoryFailure value)?  historyFailure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( BookingStateInitial value)?  initial,TResult Function( BookingStateLoading value)?  loading,TResult Function( BookingStateSuccess value)?  success,TResult Function( BookingStateFailure value)?  failure,TResult Function( BookingStateSubmitting value)?  submitting,TResult Function( BookingStateSubmitted value)?  submitted,TResult Function( BookingStateSubmitFailure value)?  submitFailure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case BookingStateInitial() when initial != null:
@@ -65,10 +65,7 @@ return success(_that);case BookingStateFailure() when failure != null:
 return failure(_that);case BookingStateSubmitting() when submitting != null:
 return submitting(_that);case BookingStateSubmitted() when submitted != null:
 return submitted(_that);case BookingStateSubmitFailure() when submitFailure != null:
-return submitFailure(_that);case BookingStateLoadingHistory() when loadingHistory != null:
-return loadingHistory(_that);case BookingStateHistorySuccess() when historySuccess != null:
-return historySuccess(_that);case BookingStateHistoryFailure() when historyFailure != null:
-return historyFailure(_that);case _:
+return submitFailure(_that);case _:
   return orElse();
 
 }
@@ -86,7 +83,7 @@ return historyFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( BookingStateInitial value)  initial,required TResult Function( BookingStateLoading value)  loading,required TResult Function( BookingStateSuccess value)  success,required TResult Function( BookingStateFailure value)  failure,required TResult Function( BookingStateSubmitting value)  submitting,required TResult Function( BookingStateSubmitted value)  submitted,required TResult Function( BookingStateSubmitFailure value)  submitFailure,required TResult Function( BookingStateLoadingHistory value)  loadingHistory,required TResult Function( BookingStateHistorySuccess value)  historySuccess,required TResult Function( BookingStateHistoryFailure value)  historyFailure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( BookingStateInitial value)  initial,required TResult Function( BookingStateLoading value)  loading,required TResult Function( BookingStateSuccess value)  success,required TResult Function( BookingStateFailure value)  failure,required TResult Function( BookingStateSubmitting value)  submitting,required TResult Function( BookingStateSubmitted value)  submitted,required TResult Function( BookingStateSubmitFailure value)  submitFailure,}){
 final _that = this;
 switch (_that) {
 case BookingStateInitial():
@@ -96,10 +93,7 @@ return success(_that);case BookingStateFailure():
 return failure(_that);case BookingStateSubmitting():
 return submitting(_that);case BookingStateSubmitted():
 return submitted(_that);case BookingStateSubmitFailure():
-return submitFailure(_that);case BookingStateLoadingHistory():
-return loadingHistory(_that);case BookingStateHistorySuccess():
-return historySuccess(_that);case BookingStateHistoryFailure():
-return historyFailure(_that);case _:
+return submitFailure(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -116,7 +110,7 @@ return historyFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( BookingStateInitial value)?  initial,TResult? Function( BookingStateLoading value)?  loading,TResult? Function( BookingStateSuccess value)?  success,TResult? Function( BookingStateFailure value)?  failure,TResult? Function( BookingStateSubmitting value)?  submitting,TResult? Function( BookingStateSubmitted value)?  submitted,TResult? Function( BookingStateSubmitFailure value)?  submitFailure,TResult? Function( BookingStateLoadingHistory value)?  loadingHistory,TResult? Function( BookingStateHistorySuccess value)?  historySuccess,TResult? Function( BookingStateHistoryFailure value)?  historyFailure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( BookingStateInitial value)?  initial,TResult? Function( BookingStateLoading value)?  loading,TResult? Function( BookingStateSuccess value)?  success,TResult? Function( BookingStateFailure value)?  failure,TResult? Function( BookingStateSubmitting value)?  submitting,TResult? Function( BookingStateSubmitted value)?  submitted,TResult? Function( BookingStateSubmitFailure value)?  submitFailure,}){
 final _that = this;
 switch (_that) {
 case BookingStateInitial() when initial != null:
@@ -126,10 +120,7 @@ return success(_that);case BookingStateFailure() when failure != null:
 return failure(_that);case BookingStateSubmitting() when submitting != null:
 return submitting(_that);case BookingStateSubmitted() when submitted != null:
 return submitted(_that);case BookingStateSubmitFailure() when submitFailure != null:
-return submitFailure(_that);case BookingStateLoadingHistory() when loadingHistory != null:
-return loadingHistory(_that);case BookingStateHistorySuccess() when historySuccess != null:
-return historySuccess(_that);case BookingStateHistoryFailure() when historyFailure != null:
-return historyFailure(_that);case _:
+return submitFailure(_that);case _:
   return null;
 
 }
@@ -146,7 +137,7 @@ return historyFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<AvailableTimeSlotEntity> availableTimes)?  success,TResult Function( String error)?  failure,TResult Function()?  submitting,TResult Function( BookingEntity booking)?  submitted,TResult Function( String error)?  submitFailure,TResult Function()?  loadingHistory,TResult Function( List<BookingEntity> bookings)?  historySuccess,TResult Function( String error)?  historyFailure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<AvailableTimeSlotEntity> availableTimes)?  success,TResult Function( String error)?  failure,TResult Function()?  submitting,TResult Function( BookingEntity booking)?  submitted,TResult Function( String error)?  submitFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case BookingStateInitial() when initial != null:
 return initial();case BookingStateLoading() when loading != null:
@@ -155,10 +146,7 @@ return success(_that.availableTimes);case BookingStateFailure() when failure != 
 return failure(_that.error);case BookingStateSubmitting() when submitting != null:
 return submitting();case BookingStateSubmitted() when submitted != null:
 return submitted(_that.booking);case BookingStateSubmitFailure() when submitFailure != null:
-return submitFailure(_that.error);case BookingStateLoadingHistory() when loadingHistory != null:
-return loadingHistory();case BookingStateHistorySuccess() when historySuccess != null:
-return historySuccess(_that.bookings);case BookingStateHistoryFailure() when historyFailure != null:
-return historyFailure(_that.error);case _:
+return submitFailure(_that.error);case _:
   return orElse();
 
 }
@@ -176,7 +164,7 @@ return historyFailure(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<AvailableTimeSlotEntity> availableTimes)  success,required TResult Function( String error)  failure,required TResult Function()  submitting,required TResult Function( BookingEntity booking)  submitted,required TResult Function( String error)  submitFailure,required TResult Function()  loadingHistory,required TResult Function( List<BookingEntity> bookings)  historySuccess,required TResult Function( String error)  historyFailure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<AvailableTimeSlotEntity> availableTimes)  success,required TResult Function( String error)  failure,required TResult Function()  submitting,required TResult Function( BookingEntity booking)  submitted,required TResult Function( String error)  submitFailure,}) {final _that = this;
 switch (_that) {
 case BookingStateInitial():
 return initial();case BookingStateLoading():
@@ -185,10 +173,7 @@ return success(_that.availableTimes);case BookingStateFailure():
 return failure(_that.error);case BookingStateSubmitting():
 return submitting();case BookingStateSubmitted():
 return submitted(_that.booking);case BookingStateSubmitFailure():
-return submitFailure(_that.error);case BookingStateLoadingHistory():
-return loadingHistory();case BookingStateHistorySuccess():
-return historySuccess(_that.bookings);case BookingStateHistoryFailure():
-return historyFailure(_that.error);case _:
+return submitFailure(_that.error);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,7 +190,7 @@ return historyFailure(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<AvailableTimeSlotEntity> availableTimes)?  success,TResult? Function( String error)?  failure,TResult? Function()?  submitting,TResult? Function( BookingEntity booking)?  submitted,TResult? Function( String error)?  submitFailure,TResult? Function()?  loadingHistory,TResult? Function( List<BookingEntity> bookings)?  historySuccess,TResult? Function( String error)?  historyFailure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<AvailableTimeSlotEntity> availableTimes)?  success,TResult? Function( String error)?  failure,TResult? Function()?  submitting,TResult? Function( BookingEntity booking)?  submitted,TResult? Function( String error)?  submitFailure,}) {final _that = this;
 switch (_that) {
 case BookingStateInitial() when initial != null:
 return initial();case BookingStateLoading() when loading != null:
@@ -214,10 +199,7 @@ return success(_that.availableTimes);case BookingStateFailure() when failure != 
 return failure(_that.error);case BookingStateSubmitting() when submitting != null:
 return submitting();case BookingStateSubmitted() when submitted != null:
 return submitted(_that.booking);case BookingStateSubmitFailure() when submitFailure != null:
-return submitFailure(_that.error);case BookingStateLoadingHistory() when loadingHistory != null:
-return loadingHistory();case BookingStateHistorySuccess() when historySuccess != null:
-return historySuccess(_that.bookings);case BookingStateHistoryFailure() when historyFailure != null:
-return historyFailure(_that.error);case _:
+return submitFailure(_that.error);case _:
   return null;
 
 }
@@ -583,176 +565,6 @@ class _$BookingStateSubmitFailureCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
   return _then(BookingStateSubmitFailure(
-null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class BookingStateLoadingHistory implements BookingState {
-  const BookingStateLoadingHistory();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingStateLoadingHistory);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'BookingState.loadingHistory()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class BookingStateHistorySuccess implements BookingState {
-  const BookingStateHistorySuccess(final  List<BookingEntity> bookings): _bookings = bookings;
-  
-
- final  List<BookingEntity> _bookings;
- List<BookingEntity> get bookings {
-  if (_bookings is EqualUnmodifiableListView) return _bookings;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_bookings);
-}
-
-
-/// Create a copy of BookingState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$BookingStateHistorySuccessCopyWith<BookingStateHistorySuccess> get copyWith => _$BookingStateHistorySuccessCopyWithImpl<BookingStateHistorySuccess>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingStateHistorySuccess&&const DeepCollectionEquality().equals(other._bookings, _bookings));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_bookings));
-
-@override
-String toString() {
-  return 'BookingState.historySuccess(bookings: $bookings)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $BookingStateHistorySuccessCopyWith<$Res> implements $BookingStateCopyWith<$Res> {
-  factory $BookingStateHistorySuccessCopyWith(BookingStateHistorySuccess value, $Res Function(BookingStateHistorySuccess) _then) = _$BookingStateHistorySuccessCopyWithImpl;
-@useResult
-$Res call({
- List<BookingEntity> bookings
-});
-
-
-
-
-}
-/// @nodoc
-class _$BookingStateHistorySuccessCopyWithImpl<$Res>
-    implements $BookingStateHistorySuccessCopyWith<$Res> {
-  _$BookingStateHistorySuccessCopyWithImpl(this._self, this._then);
-
-  final BookingStateHistorySuccess _self;
-  final $Res Function(BookingStateHistorySuccess) _then;
-
-/// Create a copy of BookingState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? bookings = null,}) {
-  return _then(BookingStateHistorySuccess(
-null == bookings ? _self._bookings : bookings // ignore: cast_nullable_to_non_nullable
-as List<BookingEntity>,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class BookingStateHistoryFailure implements BookingState {
-  const BookingStateHistoryFailure(this.error);
-  
-
- final  String error;
-
-/// Create a copy of BookingState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$BookingStateHistoryFailureCopyWith<BookingStateHistoryFailure> get copyWith => _$BookingStateHistoryFailureCopyWithImpl<BookingStateHistoryFailure>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingStateHistoryFailure&&(identical(other.error, error) || other.error == error));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,error);
-
-@override
-String toString() {
-  return 'BookingState.historyFailure(error: $error)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $BookingStateHistoryFailureCopyWith<$Res> implements $BookingStateCopyWith<$Res> {
-  factory $BookingStateHistoryFailureCopyWith(BookingStateHistoryFailure value, $Res Function(BookingStateHistoryFailure) _then) = _$BookingStateHistoryFailureCopyWithImpl;
-@useResult
-$Res call({
- String error
-});
-
-
-
-
-}
-/// @nodoc
-class _$BookingStateHistoryFailureCopyWithImpl<$Res>
-    implements $BookingStateHistoryFailureCopyWith<$Res> {
-  _$BookingStateHistoryFailureCopyWithImpl(this._self, this._then);
-
-  final BookingStateHistoryFailure _self;
-  final $Res Function(BookingStateHistoryFailure) _then;
-
-/// Create a copy of BookingState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
-  return _then(BookingStateHistoryFailure(
 null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,
   ));

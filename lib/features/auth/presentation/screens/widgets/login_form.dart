@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/app_colors.dart';
 import '../../../../../core/login_strings.dart';
+import '../../../../../config/utils/auth_regx.dart';
 import '../../view_model/auth_cubit.dart';
 
 class LoginForm extends StatefulWidget {
@@ -21,6 +22,7 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isPasswordVisible = false;
 
   @override
   void dispose() {
@@ -69,17 +71,37 @@ class _LoginFormState extends State<LoginForm> {
                 if (val == null || val.trim().isEmpty) {
                   return LoginStrings.emailRequired;
                 }
+                if (!AuthRegx.isValidEmail(val.trim())) {
+                  return LoginStrings.emailInvalid;
+                }
                 return null;
               },
             ),
             SizedBox(height: 20.h),
             TextFormField(
               controller: _passwordController,
-              obscureText: true,
+              obscureText: !_isPasswordVisible,
               style: TextStyle(fontSize: 15.sp),
               decoration: InputDecoration(
                 labelText: LoginStrings.passwordLabel,
                 prefixIcon: Icon(Icons.lock_outline, size: 22.sp),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    size: 22.sp,
+                    color: AppColors.textSecondary,
+                  ),
+                  tooltip: _isPasswordVisible
+                      ? LoginStrings.hidePassword
+                      : LoginStrings.showPassword,
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
               ),
               validator: (val) {
                 if (val == null || val.isEmpty) {

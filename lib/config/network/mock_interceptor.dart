@@ -151,10 +151,10 @@ class MockInterceptor extends Interceptor {
     if (path.endsWith('/booking') && method == 'POST') {
       await Future.delayed(const Duration(seconds: 2));
       final data = options.data as Map<String, dynamic>?;
-      final serviceId = data?['serviceId'] as String?;
+      final service = data?['service'] as String?;
       final time = data?['time'] as String?;
 
-      if (serviceId == null || time == null) {
+      if (service == null || time == null) {
         handler.reject(
           DioException(
             requestOptions: options,
@@ -175,12 +175,12 @@ class MockInterceptor extends Interceptor {
           requestOptions: options,
           statusCode: 200,
           data: {
-            'bookingId': bookingId,
-            'serviceId': serviceId,
-            'dayName': data?['dayName'] as String? ?? '',
+            'id': bookingId,
+            'service': service,
+            'date': data?['date'] as String? ?? data?['dayName'] as String? ?? '',
             'time': time,
             'notes': data?['notes'] as String? ?? '',
-            'status': 'confirmed',
+            'status': 'pending',
             'message': 'Booking confirmed successfully',
           },
         ),

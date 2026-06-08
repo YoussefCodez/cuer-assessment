@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../config/error/dio_error_handler.dart';
 import '../../../../config/network/dio_client.dart';
+import '../../../../config/network/network_exceptions.dart';
 import '../models/user_model.dart';
 
 @lazySingleton
@@ -18,7 +18,7 @@ class AuthMockDataSource {
       );
       return UserModel.fromJson(response.data as Map<String, dynamic>);
     } on DioException catch (e) {
-      throw DioErrorHandler.handleError(e);
+      throw NetworkException(ErrorHandler.handle(e));
     }
   }
 
@@ -34,7 +34,7 @@ class AuthMockDataSource {
       );
       return UserModel.fromJson(response.data as Map<String, dynamic>);
     } on DioException catch (e) {
-      throw DioErrorHandler.handleError(e);
+      throw NetworkException(ErrorHandler.handle(e));
     }
   }
 
@@ -42,7 +42,7 @@ class AuthMockDataSource {
     try {
       await _dioClient.dio.post('/auth/logout');
     } on DioException catch (e) {
-      throw DioErrorHandler.handleError(e);
+      throw NetworkException(ErrorHandler.handle(e));
     }
   }
 }

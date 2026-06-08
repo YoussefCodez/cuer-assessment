@@ -8,6 +8,9 @@ import '../datasources/booking_local_datasource.dart';
 import '../datasources/booking_mock_remote_datasource.dart';
 import '../models/booking_model.dart';
 
+/// Concrete implementation of [BookingRepositoryContract].
+///
+/// Coordinates between the mock remote data source and the local Hive cache.
 @LazySingleton(as: BookingRepositoryContract)
 class BookingRepositoryImpl implements BookingRepositoryContract {
   final BookingMockRemoteDataSource _bookingMockRemoteDataSource;
@@ -16,55 +19,67 @@ class BookingRepositoryImpl implements BookingRepositoryContract {
   const BookingRepositoryImpl({
     required BookingMockRemoteDataSource bookingMockRemoteDataSource,
     required BookingLocalDataSource bookingLocalDataSource,
-  }) : _bookingMockRemoteDataSource = bookingMockRemoteDataSource,
-       _bookingLocalDataSource = bookingLocalDataSource;
+  })  : _bookingMockRemoteDataSource = bookingMockRemoteDataSource,
+        _bookingLocalDataSource = bookingLocalDataSource;
 
   @override
-  Future<BaseResponse<List<AvailableTimeSlotEntity>>> fetchAvailableTimes(String serviceId) async {
+  Future<BaseResponse<List<AvailableTimeSlotEntity>>> fetchAvailableTimes(
+    String serviceId,
+  ) async {
     try {
-      // 1- check if cached existed and not empty or null if yes return it
-      final cached = await _bookingLocalDataSource.getCachedAvailableTimes(serviceId);
+      final cached =
+          await _bookingLocalDataSource.getCachedAvailableTimes(serviceId);
       if (cached.isNotEmpty) {
         return SuccessResponse(cached.map((e) => e.toEntity()).toList());
       }
 
-      // 2- get the data from api and cache it
-      final remote = await _bookingMockRemoteDataSource.fetchAvailableTimes(serviceId);
+      final remote =
+          await _bookingMockRemoteDataSource.fetchAvailableTimes(serviceId);
       await _bookingLocalDataSource.cacheAvailableTimes(serviceId, remote);
 
-      // 3- return remote data
       return SuccessResponse(remote.map((e) => e.toEntity()).toList());
     } on NetworkException catch (e) {
-      // 4- in catches show cache first if failed show failed response
-      final cached = await _bookingLocalDataSource.getCachedAvailableTimes(serviceId);
-      if (cached.isEmpty) {
-        return FailedResponse(ErrorHandler.handle(e));
-      }
+      final cached =
+          await _bookingLocalDataSource.getCachedAvailableTimes(serviceId);
+      if (cached.isEmpty) return FailedResponse(ErrorHandler.handle(e));
       return SuccessResponse(cached.map((e) => e.toEntity()).toList());
     } catch (e) {
-      final cached = await _bookingLocalDataSource.getCachedAvailableTimes(serviceId);
-      if (cached.isEmpty) {
-        return FailedResponse(ErrorHandler.handle(e));
-      }
+      final cached =
+          await _bookingLocalDataSource.getCachedAvailableTimes(serviceId);
+      if (cached.isEmpty) return FailedResponse(ErrorHandler.handle(e));
       return SuccessResponse(cached.map((e) => e.toEntity()).toList());
     }
   }
 
   @override
-  Future<BaseResponse<BookingEntity>> submitBooking(BookingEntity booking) async {
+  Future<BaseResponse<BookingEntity>> submitBooking(
+    BookingEntity booking,
+  ) async {
     try {
       final model = BookingModel(
-        serviceId: booking.serviceId,
-        dayName: booking.dayName,
+        id: booking.id.isNotEmpty
+            ? booking.id
+            : DateTime.now().millisecondsSinceEpoch.toString(),
+        service: booking.service,
+        date: booking.date,
         time: booking.time,
         notes: booking.notes,
+        status: booking.status,
       );
-      final remoteModel = await _bookingMockRemoteDataSource.submitBooking(model);
-      
-      // Save successfully submitted booking to history
-      await _bookingLocalDataSource.cacheBooking(remoteModel);
-      
-      return SuccessResponse(booking);
+      final remoteModel =
+          await _bookingMockRemoteDataSource.submitBooking(model);
+
+      final entity = BookingEntity(
+        id: remoteModel.id,
+        service: remoteModel.service,
+        date: remoteModel.date,
+        time: remoteModel.time,
+        notes: remoteModel.notes,
+        status: remoteModel.status,
+      );
+
+      await _bookingLocalDataSource.cacheBooking(entity);
+      return SuccessResponse(entity);
     } on NetworkException catch (e) {
       return FailedResponse(ErrorHandler.handle(e));
     } catch (e) {
@@ -75,14 +90,9 @@ class BookingRepositoryImpl implements BookingRepositoryContract {
   @override
   Future<BaseResponse<List<BookingEntity>>> fetchBookingHistory() async {
     try {
-      final cachedModels = await _bookingLocalDataSource.getCachedBookings();
-      final entities = cachedModels.map((model) => BookingEntity(
-        serviceId: model.serviceId,
-        dayName: model.dayName,
-        time: model.time,
-        notes: model.notes,
-      )).toList();
-      return SuccessResponse(entities);
+      return SuccessResponse(
+        await _bookingLocalDataSource.getCachedBookings(),
+      );
     } catch (e) {
       return FailedResponse(ErrorHandler.handle(e));
     }

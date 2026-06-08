@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/home_strings.dart';
-import 'dashboard_screen.dart';
+import '../../../dashboard/presentation/view_model/dashboard_cubit.dart';
+import '../../../dashboard/presentation/screens/dashboard_screen.dart';
 import 'home_services_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -15,7 +17,7 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = const [
+  List<Widget> get _screens => const [
     HomeServicesScreen(),
     DashboardScreen(),
   ];
@@ -30,6 +32,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
+          if (index == 1 && _currentIndex != 1) {
+            context.read<DashboardCubit>().loadDashboard();
+          } else if (index == 1 && _currentIndex == 1) {
+             // Already on dashboard, could trigger refresh if we wanted
+             context.read<DashboardCubit>().loadDashboard();
+          }
           setState(() {
             _currentIndex = index;
           });

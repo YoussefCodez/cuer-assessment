@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class ServiceEntity extends Equatable {
+class ServiceEntity {
   final String id;
   final String title;
   final String description;
@@ -16,5 +14,21 @@ class ServiceEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, title, description, iconCodePoint, price];
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ServiceEntity &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          title == other.title &&
+          description == other.description &&
+          iconCodePoint == other.iconCodePoint &&
+          price == other.price;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      title.hashCode ^
+      description.hashCode ^
+      iconCodePoint.hashCode ^
+      price.hashCode;
 }

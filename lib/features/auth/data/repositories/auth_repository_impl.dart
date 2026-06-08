@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import '../../../../config/network/base_response.dart';
 import '../../../../config/storage/token_storage.dart';
-import '../../../../config/utils/auth_regx.dart';
+import '../../domain/auth_validator.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository_contract.dart';
 import '../datasources/auth_local_datasource.dart';
@@ -12,27 +12,22 @@ class AuthRepositoryImpl implements AuthRepositoryContract {
   final AuthMockDataSource _authMockDataSource;
   final AuthLocalDataSource _authLocalDataSource;
   final TokenStorage _tokenStorage;
+  final AuthValidator _authValidator;
 
   const AuthRepositoryImpl({
     required AuthMockDataSource authMockDataSource,
     required AuthLocalDataSource authLocalDataSource,
     required TokenStorage tokenStorage,
+    required AuthValidator authValidator,
   }) : _authMockDataSource = authMockDataSource,
        _authLocalDataSource = authLocalDataSource,
-       _tokenStorage = tokenStorage;
+       _tokenStorage = tokenStorage,
+       _authValidator = authValidator;
 
   @override
   Future<BaseResponse<UserEntity>> login(String email, String password) async {
     try {
-      if (!AuthRegx.isValidEmail(email)) {
-        return FailedResponse('Invalid email format');
-      }
-      if (password.isEmpty) {
-        return FailedResponse('Password cannot be empty');
-      }
-      if (password.length < 6) {
-        return FailedResponse('Password must be at least 6 characters');
-      }
+      _authValidator.validateCredentials(email, password);
 
       final user = await _authMockDataSource.login(email, password);
       await _tokenStorage.saveToken(user.token);
@@ -45,6 +40,8 @@ class AuthRepositoryImpl implements AuthRepositoryContract {
           token: user.token,
         ),
       );
+    } on ArgumentError catch (e) {
+      return FailedResponse(e.message);
     } catch (e) {
       return FailedResponse(e.toString().replaceAll('Exception: ', ''));
     }
@@ -60,12 +57,7 @@ class AuthRepositoryImpl implements AuthRepositoryContract {
       if (name.trim().isEmpty) {
         return FailedResponse('Name cannot be empty');
       }
-      if (!AuthRegx.isValidEmail(email)) {
-        return FailedResponse('Invalid email format');
-      }
-      if (password.length < 6) {
-        return FailedResponse('Password must be at least 6 characters');
-      }
+      _authValidator.validateCredentials(email, password);
 
       final user = await _authMockDataSource.register(
         name: name,
@@ -82,6 +74,8 @@ class AuthRepositoryImpl implements AuthRepositoryContract {
           token: user.token,
         ),
       );
+    } on ArgumentError catch (e) {
+      return FailedResponse(e.message);
     } catch (e) {
       return FailedResponse(e.toString().replaceAll('Exception: ', ''));
     }

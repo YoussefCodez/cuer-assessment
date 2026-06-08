@@ -30,5 +30,8 @@ class BookingStrings {
   static const String bookingSuccess = 'Booking confirmed successfully!';
   static const String bookingFailed = 'Booking failed. Please try again.';
   static const String summaryCurrencyLabel = 'EGP';
+
+  /// Platform service fee added to every booking
+  static const double serviceFee = 50.0;
 }
 

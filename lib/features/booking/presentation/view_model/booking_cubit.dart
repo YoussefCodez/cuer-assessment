@@ -1,9 +1,8 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cure/features/booking/domain/entities/available_time_slot_entity.dart';
 import 'package:cure/features/booking/domain/entities/booking_entity.dart';
 import 'package:cure/features/booking/domain/usecases/fetch_available_times.dart';
 import 'package:cure/features/booking/domain/usecases/submit_booking_usecase.dart';
-import 'package:cure/features/booking/domain/usecases/get_booking_history.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../config/network/base_response.dart';
@@ -13,12 +12,10 @@ import 'booking_states.dart';
 class BookingCubit extends Cubit<BookingState> {
   final FetchAvailableTimesUseCase fetchAvailableTimesUseCase;
   final SubmitBookingUseCase submitBookingUseCase;
-  final GetBookingHistoryUseCase getBookingHistoryUseCase;
 
   BookingCubit(
     this.fetchAvailableTimesUseCase,
     this.submitBookingUseCase,
-    this.getBookingHistoryUseCase,
   ) : super(const BookingState.initial());
 
   Future<void> fetchAvailableTimes(String serviceId) async {
@@ -49,17 +46,4 @@ class BookingCubit extends Cubit<BookingState> {
     }
   }
 
-  Future<void> fetchBookingHistory() async {
-    emit(const BookingState.loadingHistory());
-    try {
-      final result = await getBookingHistoryUseCase.call();
-      if (result is SuccessResponse<List<BookingEntity>>) {
-        emit(BookingState.historySuccess(result.data));
-      } else if (result is FailedResponse<List<BookingEntity>>) {
-        emit(BookingState.historyFailure(result.message));
-      }
-    } catch (e) {
-      emit(BookingState.historyFailure(e.toString()));
-    }
-  }
 }

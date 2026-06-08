@@ -16,7 +16,7 @@ class StepThreeSummary extends StatelessWidget {
   final String servicePrice;
   final String selectedDay;
   final String selectedTime;
-  final String notes;
+  final TextEditingController notesController;
 
   const StepThreeSummary({
     super.key,
@@ -25,17 +25,15 @@ class StepThreeSummary extends StatelessWidget {
     required this.servicePrice,
     required this.selectedDay,
     required this.selectedTime,
-    required this.notes,
+    required this.notesController,
   });
-
-  static const double _serviceFee = 50.0;
 
   double get _serviceAmount {
     final match = RegExp(r'\d+').firstMatch(servicePrice);
     return match != null ? double.tryParse(match.group(0)!) ?? 0 : 0;
   }
 
-  double get _total => _serviceAmount + _serviceFee;
+  double get _total => _serviceAmount + BookingStrings.serviceFee;
 
   @override
   Widget build(BuildContext context) {
@@ -111,13 +109,13 @@ class StepThreeSummary extends StatelessWidget {
             SizedBox(height: 16.h),
             BookingNotesCard(
               title: BookingStrings.summaryNotes,
-              notes: notes,
+              notes: notesController.text,
               placeholder: BookingStrings.summaryNoNotes,
             ),
             SizedBox(height: 16.h),
             BookingCostCard(
               serviceAmount: _serviceAmount,
-              serviceFee: _serviceFee,
+              serviceFee: BookingStrings.serviceFee,
               total: _total,
               serviceCostLabel: BookingStrings.summaryServiceCost,
               feeCostLabel: BookingStrings.summaryFeeCost,
@@ -126,10 +124,10 @@ class StepThreeSummary extends StatelessWidget {
             ),
             SizedBox(height: 24.h),
             BookingConfirmButton(
-              serviceId: serviceId,
+              serviceName: serviceName,
               selectedDay: selectedDay,
               selectedTime: selectedTime,
-              notes: notes,
+              notesController: notesController,
             ),
           ],
         ),

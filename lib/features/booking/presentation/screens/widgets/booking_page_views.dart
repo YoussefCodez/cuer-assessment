@@ -88,7 +88,6 @@ class _BookingPageViewsState extends State<BookingPageViews> {
               });
             },
             children: [
-              // Step 1: Select Available Date & Time
               BlocBuilder<BookingCubit, BookingState>(
                 builder: (context, state) {
                   if (state is BookingStateLoading || state is BookingStateInitial) {
@@ -108,6 +107,13 @@ class _BookingPageViewsState extends State<BookingPageViews> {
                               fontSize: 14.sp,
                               color: AppColors.textSecondary,
                             ),
+                          ),
+                          SizedBox(height: 16.h),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<BookingCubit>().fetchAvailableTimes(widget.serviceId);
+                            },
+                            child: const Text('Retry'),
                           ),
                         ],
                       ),
@@ -137,19 +143,17 @@ class _BookingPageViewsState extends State<BookingPageViews> {
                 },
               ),
 
-              // Step 2: Medical Notes
               SingleChildScrollView(
                 child: StepTwoNotesInput(controller: _notesController),
               ),
 
-              // Step 3: Summary & Confirm
               StepThreeSummary(
                 serviceId: widget.serviceId,
                 serviceName: widget.serviceName,
                 servicePrice: widget.servicePrice,
                 selectedDay: _selectedDay?.dayName ?? '',
                 selectedTime: _selectedTime ?? '',
-                notes: _notesController.text,
+                notesController: _notesController,
               ),
             ],
           ),

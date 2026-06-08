@@ -18,9 +18,4 @@ abstract class BookingState with _$BookingState {
   const factory BookingState.submitting() = BookingStateSubmitting;
   const factory BookingState.submitted(BookingEntity booking) = BookingStateSubmitted;
   const factory BookingState.submitFailure(String error) = BookingStateSubmitFailure;
-
-  // Booking history states
-  const factory BookingState.loadingHistory() = BookingStateLoadingHistory;
-  const factory BookingState.historySuccess(List<BookingEntity> bookings) = BookingStateHistorySuccess;
-  const factory BookingState.historyFailure(String error) = BookingStateHistoryFailure;
 }

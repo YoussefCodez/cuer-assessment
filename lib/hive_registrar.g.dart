@@ -6,12 +6,14 @@ import 'package:hive_ce/hive_ce.dart';
 import 'package:cure/features/auth/data/models/user_model.dart';
 import 'package:cure/features/booking/data/models/available_time_slot_model.dart';
 import 'package:cure/features/booking/data/models/booking_model.dart';
+import 'package:cure/features/booking/domain/entities/booking_status.dart';
 import 'package:cure/features/home/data/models/service_model.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
     registerAdapter(AvailableTimeSlotModelAdapter());
     registerAdapter(BookingModelAdapter());
+    registerAdapter(BookingStatusAdapter());
     registerAdapter(ServiceModelAdapter());
     registerAdapter(UserModelAdapter());
   }
@@ -21,6 +23,7 @@ extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
     registerAdapter(AvailableTimeSlotModelAdapter());
     registerAdapter(BookingModelAdapter());
+    registerAdapter(BookingStatusAdapter());
     registerAdapter(ServiceModelAdapter());
     registerAdapter(UserModelAdapter());
   }

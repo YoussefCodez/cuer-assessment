@@ -7,6 +7,7 @@ import 'core/app_theme.dart';
 import 'features/auth/presentation/screens/login_screen.dart';
 import 'features/auth/presentation/view_model/auth_cubit.dart';
 import 'features/auth/presentation/view_model/auth_state.dart';
+import 'features/dashboard/presentation/view_model/dashboard_cubit.dart';
 import 'features/home/presentation/screens/main_navigation_screen.dart';
 import 'features/home/presentation/view_model/services_cubit.dart';
 import 'hive_registrar.g.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<ServicesCubit>()..loadServices(),
         ),
+        BlocProvider(
+          create: (context) => getIt<DashboardCubit>(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -46,6 +50,12 @@ class MyApp extends StatelessWidget {
               builder: (context, state) {
                 if (state is AuthSuccess) {
                   return const MainNavigationScreen();
+                } else if (state is AuthInitial || state is AuthLoading) {
+                  return const Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
                 } else {
                   return const LoginScreen();
                 }
