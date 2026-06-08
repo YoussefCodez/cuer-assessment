@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/login_strings.dart';
 import '../view_model/auth_cubit.dart';
@@ -18,7 +19,7 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
             child: BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is AuthSuccess) {
@@ -43,9 +44,9 @@ class LoginScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const LoginHeader(),
-                    const SizedBox(height: 48),
+                    SizedBox(height: 48.h),
                     LoginForm(isLoading: state is AuthLoading),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.h),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).push(

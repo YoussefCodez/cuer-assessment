@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/app_colors.dart';
 import '../../../../../core/login_strings.dart';
 import '../../view_model/auth_cubit.dart';
@@ -43,25 +44,26 @@ class _LoginFormState extends State<LoginForm> {
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withAlpha(10),
-              blurRadius: 20,
-              offset: const Offset(0, 4),
+              blurRadius: 20.r,
+              offset: Offset(0, 4.h),
             ),
           ],
         ),
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
+              style: TextStyle(fontSize: 15.sp),
+              decoration: InputDecoration(
                 labelText: LoginStrings.emailLabel,
-                prefixIcon: Icon(Icons.email_outlined),
+                prefixIcon: Icon(Icons.email_outlined, size: 22.sp),
               ),
               validator: (val) {
                 if (val == null || val.trim().isEmpty) {
@@ -70,13 +72,14 @@ class _LoginFormState extends State<LoginForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             TextFormField(
               controller: _passwordController,
               obscureText: true,
-              decoration: const InputDecoration(
+              style: TextStyle(fontSize: 15.sp),
+              decoration: InputDecoration(
                 labelText: LoginStrings.passwordLabel,
-                prefixIcon: Icon(Icons.lock_outline),
+                prefixIcon: Icon(Icons.lock_outline, size: 22.sp),
               ),
               validator: (val) {
                 if (val == null || val.isEmpty) {
@@ -85,13 +88,22 @@ class _LoginFormState extends State<LoginForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32.h),
             if (widget.isLoading)
               const Center(child: CircularProgressIndicator())
             else
               ElevatedButton(
                 onPressed: _submit,
-                child: const Text(LoginStrings.loginButton),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(double.infinity, 50.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                ),
+                child: Text(
+                  LoginStrings.loginButton,
+                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                ),
               ),
           ],
         ),

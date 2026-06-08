@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/app_colors.dart';
-import '../view_model/auth_cubit.dart';
-import '../view_model/auth_state.dart';
-import 'widgets/user_profile_card.dart';
+import '../../../auth/presentation/view_model/auth_cubit.dart';
+import '../../../auth/presentation/view_model/auth_state.dart';
+import '../widgets/user_profile_card.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Dashboard'),
-      ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: EdgeInsets.all(24.w),
           child: BlocBuilder<AuthCubit, AuthState>(
             builder: (context, state) {
               if (state is AuthSuccess) {

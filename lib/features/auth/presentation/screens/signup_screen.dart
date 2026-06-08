@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/signup_strings.dart';
 import '../view_model/auth_cubit.dart';
@@ -18,7 +19,7 @@ class SignupScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back, color: AppColors.textPrimary, size: 24.sp),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -26,7 +27,7 @@ class SignupScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
             child: BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is AuthSuccess) {
@@ -52,9 +53,9 @@ class SignupScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SignupHeader(),
-                    const SizedBox(height: 48),
+                    SizedBox(height: 48.h),
                     SignupForm(isLoading: state is AuthLoading),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.h),
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
                       child: const Text(SignupStrings.alreadyHaveAccount),
