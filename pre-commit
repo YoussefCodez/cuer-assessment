@@ -1,0 +1,11 @@
+#!/bin/sh
+
+result=$(flutter analyze --no-fatal-infos --no-fatal-warnings)
+exitCode=$? # If the exitCode is zero, then command executed successfully.
+
+if [ $exitCode  -ne 0 ]; then
+  echo "$result"
+  printf "Flutter analyze found issues, please fix them."
+  exit 1
+fi
+printf "Finished running flutter analyze command."
