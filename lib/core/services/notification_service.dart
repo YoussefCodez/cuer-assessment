@@ -80,7 +80,6 @@ class NotificationService {
     try {
       final token = await _firebaseMessaging.getToken();
       log('FCM Token: $token', name: 'NotificationService');
-      // TODO: Send token to your server
     } catch (e) {
       log('Error fetching FCM token: $e', name: 'NotificationService');
     }
@@ -89,7 +88,6 @@ class NotificationService {
   void _listenToTokenRefresh() {
     _firebaseMessaging.onTokenRefresh.listen((newToken) {
       log('FCM Token refreshed: $newToken', name: 'NotificationService');
-      // TODO: Send new token to your server
     }).onError((error) {
       log('Error on token refresh: $error', name: 'NotificationService');
     });
