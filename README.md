@@ -1,6 +1,17 @@
 # CURE Flutter Assessment
 
+[![Download APK](https://img.shields.io/badge/Download-APK-green.svg?style=for-the-badge)](link/to/your/app.apk)
+
 A comprehensive Flutter application demonstrating clean architecture, solid principles, and robust state management for a healthcare booking platform.
+
+## App Screenshots
+
+<p align="center">
+  <!-- Add your screenshot paths here -->
+  <img src="https://via.placeholder.com/200x400.png?text=Screenshot+1" width="200" />
+  <img src="https://via.placeholder.com/200x400.png?text=Screenshot+2" width="200" />
+  <img src="https://via.placeholder.com/200x400.png?text=Screenshot+3" width="200" />
+</p>
 
 ## Architecture
 
@@ -18,6 +29,7 @@ Each feature contains:
 - **State Machine**: Full lifecycle management of bookings (`Pending` → `Confirmed` → `Completed`/`Cancelled`).
 - **Offline Support**: Heavy reliance on local caching using Hive. Network calls gracefully fall back to cached data without user interruption.
 - **Responsive UI**: Built with `flutter_screenutil` for pixel-perfect designs across screen sizes.
+- **Code Quality & CI/CD**: Enforces high code quality using a `pre-commit` hook (for formatting and linting before commits) and a GitHub Actions CI/CD workflow for automated quality checks.
 
 ## Technologies Used
 

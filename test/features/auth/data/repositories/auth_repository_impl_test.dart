@@ -48,7 +48,7 @@ void main() {
   group('login', () {
     test('should return SuccessResponse and cache token/user when login is successful', () async {
       // arrange
-      when(() => mockAuthValidator.validateCredentials(tEmail, tPassword)).thenReturn(true);
+      when(() => mockAuthValidator.validateCredentials(tEmail, tPassword)).thenAnswer((_) {});
       when(() => mockRemoteDataSource.login(tEmail, tPassword)).thenAnswer((_) async => tUserModel);
       when(() => mockTokenStorage.saveToken(tToken)).thenAnswer((_) async {});
       when(() => mockLocalDataSource.cacheUser(tUserModel)).thenAnswer((_) async {});
@@ -86,7 +86,7 @@ void main() {
   group('register', () {
     test('should return SuccessResponse and cache token/user when register is successful', () async {
       // arrange
-      when(() => mockAuthValidator.validateCredentials(tEmail, tPassword)).thenReturn(true);
+      when(() => mockAuthValidator.validateCredentials(tEmail, tPassword)).thenAnswer((_) {});
       when(() => mockRemoteDataSource.register(name: tName, email: tEmail, password: tPassword))
           .thenAnswer((_) async => tUserModel);
       when(() => mockTokenStorage.saveToken(tToken)).thenAnswer((_) async {});
