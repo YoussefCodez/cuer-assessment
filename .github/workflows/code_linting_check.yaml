@@ -1,0 +1,30 @@
+name: Linting Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  flutter_analyze:
+    name: Run flutter analyze
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v6
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: build runner
+        run: dart pub run build_runner build --delete-conflicting-outputs
+
+      - name: Analyze code
+        run: flutter analyze
