@@ -1,16 +1,24 @@
-# CURE Flutter Assessment
+Cure Assessment
 
-[![Download APK](https://img.shields.io/badge/Download-APK-green.svg?style=for-the-badge)](link/to/your/app.apk)
+[![Download APK](https://img.shields.io/badge/Download-APK-green.svg?style=for-the-badge)](https://drive.google.com/file/d/1jbQq5b7IZcHd2kJ-DQlHutZVLZPyOASy/view?usp=sharing)
+
+
+[VIDEO](https://drive.google.com/file/d/16Wr0piqBjkDQyljtaFyTNaDAPbwwBzTs/view?usp=sharing)
 
 A comprehensive Flutter application demonstrating clean architecture, solid principles, and robust state management for a healthcare booking platform.
 
 ## App Screenshots
 
 <p align="center">
-  <!-- Add your screenshot paths here -->
-  <img src="https://via.placeholder.com/200x400.png?text=Screenshot+1" width="200" />
-  <img src="https://via.placeholder.com/200x400.png?text=Screenshot+2" width="200" />
-  <img src="https://via.placeholder.com/200x400.png?text=Screenshot+3" width="200" />
+  <img width="200" alt="Screenshot_2026-06-09-19-23-41-16_1b6aa7b45a5050b3cbc69b94b21bc2e4" src="https://github.com/user-attachments/assets/7424fbea-9e0c-4b37-a536-826a9f80dd2b" />
+  <img width="200"  alt="Screenshot_2026-06-09-19-23-46-55_1b6aa7b45a5050b3cbc69b94b21bc2e4" src="https://github.com/user-attachments/assets/8a773a6d-4b60-4dfd-8fab-46584e83224a" />
+  <img width="200"  alt="Screenshot_2026-06-09-19-24-13-12_1b6aa7b45a5050b3cbc69b94b21bc2e4" src="https://github.com/user-attachments/assets/d5e71459-abaf-41b9-a96a-b0a0723fb576" />
+  <img width="200"  alt="Screenshot_2026-06-09-19-24-29-47_1b6aa7b45a5050b3cbc69b94b21bc2e4" src="https://github.com/user-attachments/assets/a33df8a0-d67f-43f9-920c-de0e7c6e7fc6" />
+  <img width="200"  alt="Screenshot_2026-06-09-19-24-34-33_1b6aa7b45a5050b3cbc69b94b21bc2e4" src="https://github.com/user-attachments/assets/8dc974fe-9834-40b9-84d6-ffe597d19f69" />
+  <img width="200"  alt="Screenshot_2026-06-09-19-24-22-12_1b6aa7b45a5050b3cbc69b94b21bc2e4" src="https://github.com/user-attachments/assets/f99af74f-ea99-4741-a832-a1d7a51c79ed" />
+  <img width="200"  alt="Screenshot_2026-06-09-19-24-37-32_1b6aa7b45a5050b3cbc69b94b21bc2e4" src="https://github.com/user-attachments/assets/d842f30e-89e9-4ac6-85d2-05d939252dfd" />
+  <img width="200" alt="Screenshot_2026-06-09-19-24-53-96_1b6aa7b45a5050b3cbc69b94b21bc2e4" src="https://github.com/user-attachments/assets/0d9b1080-a19d-4af8-b2f9-8d16c5ac3f39" />
+
 </p>
 
 ## Architecture
